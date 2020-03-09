@@ -1,0 +1,23 @@
+package Exemplo01;
+
+public class Conta {
+	// Atributos da classe
+	public int numero;
+	public String titular;
+	public double saldo;
+	public String cpf;
+	
+	//Métodos da classe
+	void sacar(){
+		System.out.println();
+	}
+	void depositar(){
+		System.out.println();
+	}
+	void visualizarSaldo(){
+		System.out.println("Saldo: " + this.saldo);
+	}
+	void transferirDinheiro(){
+		System.out.println();
+	}
+}

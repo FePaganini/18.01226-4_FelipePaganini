@@ -1,0 +1,18 @@
+package Exemplo01;
+
+public class ContaTesteDrive {
+	public static void main(String[] args){
+		// Declara c1, ainda sem nada dentro
+		Conta c1;
+		// Instancia conta - colaca a referência de um objeto
+		c1 = new Conta();
+		// Acesso o titular da conta
+		c1.titular = "Odair";
+		System.out.println("Titular: " + c1.titular);
+		
+		Conta c2 = new Conta();
+		c2.titular = "Goku";
+		System.out.println("Titular C2: " + c2.titular);
+	}
+	
+}

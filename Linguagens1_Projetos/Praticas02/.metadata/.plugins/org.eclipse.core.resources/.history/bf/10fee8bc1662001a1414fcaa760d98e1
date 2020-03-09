@@ -1,0 +1,30 @@
+package Exemplo01;
+
+public class Conta {
+	// Atributos da classe
+	public int numero;
+	public String titular;
+	public double saldo;
+	public String cpf;
+	
+	//Métodos da classe
+	boolean sacar(double valor){
+		if(valor > this.saldo){
+			return false;
+		}
+		else{
+			this.saldo = this.saldo - valor; //this.saldo -= valor;
+			return true;
+		}
+		System.out.println();
+	}
+	void depositar(){
+		System.out.println();
+	}
+	void visualizarSaldo(){
+		System.out.println("Saldo: " + this.saldo);
+	}
+	void transferirDinheiro(){
+		System.out.println();
+	}
+}

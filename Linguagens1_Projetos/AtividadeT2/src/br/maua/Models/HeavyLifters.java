@@ -18,7 +18,7 @@ public class HeavyLifters extends Membro {
     @Override
     public void mensagem(Enum<Horarios> tempo) {
         if (tempo == Horarios.values()[0]) {
-            System.out.println("Podemcontarconosco!");
+            System.out.println("Podem contar conosco!");
         }
         else {
             System.out.println("N00b_qu3_n_Se_r3pita.bat");

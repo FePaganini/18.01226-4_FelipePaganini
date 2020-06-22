@@ -39,7 +39,7 @@ public class Sistema {
                 System.out.print("Email do usuário: ");
                 String email = scan.nextLine();
                 System.out.println("Cargo do usuário: ");
-                System.out.println("0 - Mobile Members \n 1 - Heavy Lifters \n 2 - Script Guys \n 3 - Big Brothers");
+                System.out.println("0 - Mobile Members \n1 - Heavy Lifters \n2 - Script Guys \n3 - Big Brothers");
                 int func = Integer.parseInt(scan.nextLine());
                 switch (func) {
                     case 0:
@@ -77,7 +77,14 @@ public class Sistema {
                 }
                 break;
             case 4:
-                System.out.println("oi");
+                for(int i=0; i< membros.size();i++){
+                    System.out.println("Número: " + (i+1));
+                    membros.get(i).relatorio();
+                    System.out.println("-------------");
+                }
+                System.out.print("Escolha um número para remover um usuário: ");
+                int num = Integer.parseInt(scan.nextLine());
+                membros.remove(num-1);
                 break;
         }
     }

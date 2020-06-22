@@ -4,9 +4,13 @@ import br.maua.Enum.Horarios;
 public class Sistema {
     Scanner scan = new Scanner(System.in);
     Enum<Horarios> tempo = Horarios.values()[0];
+    int escolha = 0;
 
     public void rodar(){
-        menu();
+        while (escolha != 5) {
+            menu();
+            acao();
+        }
     }
 
     public void menu(){
@@ -19,5 +23,31 @@ public class Sistema {
         System.out.println("3 - Trocar horário de trabalho");
         System.out.println("4 - Retirar membro");
         System.out.println("5 - Fechar sistema ");
+        System.out.print("Opção escolhida: ");
+    }
+    public void acao(){
+        escolha = Integer.parseInt(scan.nextLine());
+        switch(escolha){
+            case 0:
+                System.out.println("oi");
+                break;
+            case 1:
+                System.out.println("oi");
+                break;
+            case 2:
+                System.out.println("oi");
+                break;
+            case 3:
+                if(tempo == Horarios.values()[0]){
+                    tempo = Horarios.values()[1];
+                }
+                else{
+                    tempo = Horarios.values()[0];
+                }
+                break;
+            case 4:
+                System.out.println("oi");
+                break;
+        }
     }
 }

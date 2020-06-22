@@ -43,7 +43,17 @@ public class Sistema {
                 int func = Integer.parseInt(scan.nextLine());
                 switch (func) {
                     case 0:
-                        Membro
+                        membros.add(new MobileMembers(nome,email,TiposMembros.values()[0]));
+                        break;
+                    case 1:
+                        membros.add(new HeavyLifters(nome,email,TiposMembros.values()[1]));
+                        break;
+                    case 2:
+                        membros.add(new ScriptGuys(nome,email,TiposMembros.values()[2]));
+                        break;
+                    case 3:
+                        membros.add(new BigBrothers(nome,email,TiposMembros.values()[3]));
+                        break;
                 }
                 break;
             case 1:

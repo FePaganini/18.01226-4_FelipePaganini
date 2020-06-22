@@ -1,4 +1,5 @@
 package br.maua.Models;
 
-public class Membro {
+public abstract class Membro {
+
 }

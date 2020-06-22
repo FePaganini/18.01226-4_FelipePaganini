@@ -1,4 +1,4 @@
 package br.maua.Models;
 
-public class MobileMembers {
+public class MobileMembers extends Membro{
 }

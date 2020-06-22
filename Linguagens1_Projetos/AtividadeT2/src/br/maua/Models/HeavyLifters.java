@@ -1,4 +1,4 @@
 package br.maua.Models;
 
-public class HeavyLifters {
+public class HeavyLifters extends Membro{
 }

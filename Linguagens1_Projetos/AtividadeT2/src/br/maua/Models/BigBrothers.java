@@ -1,4 +1,5 @@
 package br.maua.Models;
 
-public class BigBrothers {
+public class BigBrothers extends Membro {
+
 }

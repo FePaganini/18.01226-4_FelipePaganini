@@ -1,4 +1,4 @@
 package br.maua.Models;
 
-public class ScriptGuys {
+public class ScriptGuys extends Membro{
 }

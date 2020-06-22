@@ -1,5 +1,5 @@
 package br.maua.Enum;
 
-public enum Horários {
+public enum Horarios {
     Regular,Extra;
 }

@@ -1,10 +1,15 @@
 package br.maua.Models;
+import java.util.ArrayList;
 import java.util.Scanner;
 import br.maua.Enum.Horarios;
+import br.maua.Enum.TiposMembros;
+
 public class Sistema {
     Scanner scan = new Scanner(System.in);
     Enum<Horarios> tempo = Horarios.values()[0];
+    ArrayList<Membro> membros = new ArrayList<>();
     int escolha = 0;
+
 
     public void rodar(){
         while (escolha != 5) {
@@ -29,7 +34,17 @@ public class Sistema {
         escolha = Integer.parseInt(scan.nextLine());
         switch(escolha){
             case 0:
-                System.out.println("oi");
+                System.out.println("Nome do usuário: ");
+                String nome = scan.nextLine();
+                System.out.println("Email do usuário: ");
+                String email = scan.nextLine();
+                System.out.println("Cargo do usuário: ");
+                System.out.println("0 - Mobile Members /n 1 - Heavy Lifters /n 2 - Script Guys /n 3 - Big Brothers");
+                int func = Integer.parseInt(scan.nextLine());
+                switch (func) {
+                    case 0:
+                        Membro
+                }
                 break;
             case 1:
                 System.out.println("oi");

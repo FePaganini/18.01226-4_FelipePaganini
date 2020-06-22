@@ -34,12 +34,12 @@ public class Sistema {
         escolha = Integer.parseInt(scan.nextLine());
         switch(escolha){
             case 0:
-                System.out.println("Nome do usuário: ");
+                System.out.print("Nome do usuário: ");
                 String nome = scan.nextLine();
-                System.out.println("Email do usuário: ");
+                System.out.print("Email do usuário: ");
                 String email = scan.nextLine();
                 System.out.println("Cargo do usuário: ");
-                System.out.println("0 - Mobile Members /n 1 - Heavy Lifters /n 2 - Script Guys /n 3 - Big Brothers");
+                System.out.println("0 - Mobile Members \n 1 - Heavy Lifters \n 2 - Script Guys \n 3 - Big Brothers");
                 int func = Integer.parseInt(scan.nextLine());
                 switch (func) {
                     case 0:
@@ -57,10 +57,16 @@ public class Sistema {
                 }
                 break;
             case 1:
-                System.out.println("oi");
+                for(int i=0; i< membros.size();i++){
+                    membros.get(i).relatorio();
+                    System.out.println("-------------");
+                }
                 break;
             case 2:
-                System.out.println("oi");
+                for(int i=0; i< membros.size();i++){
+                    membros.get(i).mensagem(tempo);
+                    System.out.println("-------------");
+                }
                 break;
             case 3:
                 if(tempo == Horarios.values()[0]){

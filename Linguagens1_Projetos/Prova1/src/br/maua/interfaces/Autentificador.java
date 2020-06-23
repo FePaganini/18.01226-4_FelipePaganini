@@ -7,5 +7,5 @@ package br.maua.interfaces;
  * @version 1.0
  */
 public interface Autentificador {
-    public void autentificacao();
+    public boolean autentificacao();
 }

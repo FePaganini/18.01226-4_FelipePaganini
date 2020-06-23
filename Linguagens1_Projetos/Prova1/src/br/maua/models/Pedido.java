@@ -1,8 +1,9 @@
 package br.maua.models;
 import br.maua.enums.EstadoPedido;
 import br.maua.enums.FormaPagamento;
+import br.maua.interfaces.QuadroPedidos;
 
-public class Pedido {
+public class Pedido implements QuadroPedidos {
     public String id;
     private Enum<FormaPagamento> pagamento;
     private String descricao;
@@ -17,4 +18,12 @@ public class Pedido {
         this.estado = estado;
     }
 
+    @Override
+    public void mostrarPedidos() {
+        System.out.println("Id: "+ id);
+        System.out.println("Forma de pagamento: "+ pagamento);
+        System.out.println("Descrição: "+ descricao);
+        System.out.println("Valor: "+ valor + " reais");
+        System.out.println("Estado do pedido: "+ estado);
+    }
 }

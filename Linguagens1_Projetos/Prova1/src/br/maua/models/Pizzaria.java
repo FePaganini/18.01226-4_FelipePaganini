@@ -37,21 +37,30 @@ public class Pizzaria {
                 if(usuario.autentificacao(confirmarSenha)){
                     menuPagamento();
                     pagamento = Integer.parseInt(scan.nextLine());
+                    System.out.print("Descrição do pedido: ");
                     String descricao = scan.nextLine();
+                    System.out.print("Valor: ");
                     String valor = scan.nextLine();
                     pedidos.add(new Pedido(geraId(),geraPagamento(pagamento),descricao,valor,EstadoPedido.values()[0]));
                 }
+                else {
+                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
+                }
                 break;
             case 2:
-                pedidos.forEach(Pedido ->{
-
-                });
+                for(int i=0; i< pedidos.size();i++){
+                    pedidos.get(i).mostrarPedidos();
+                    System.out.println("-----------------------------------------------");
+                }
                 break;
             case 3:
                 System.out.print("Confirme sua senha: ");
                 confirmarSenha = scan.nextLine();
                 if(usuario.autentificacao(confirmarSenha)){
 
+                }
+                else {
+                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
                 }
         }
     }
@@ -66,12 +75,13 @@ public class Pizzaria {
     }
 
     public void menuPagamento(){
-        System.out.println("Insira a opção de pagamento:");
+        System.out.println("Formas de pagamento:");
         System.out.println("1 - " + FormaPagamento.values()[0]);
         System.out.println("2 - " + FormaPagamento.values()[1]);
         System.out.println("3 - " + FormaPagamento.values()[2]);
         System.out.println("4 - " + FormaPagamento.values()[3]);
         System.out.println("5 - " + FormaPagamento.values()[4]);
+        System.out.print("Insira a opção de pagamento: ");
     }
 
     public Enum geraPagamento(int pagamento){
@@ -91,5 +101,5 @@ public class Pizzaria {
             return FormaPagamento.values()[4];
         }
     }
-    
+
 }

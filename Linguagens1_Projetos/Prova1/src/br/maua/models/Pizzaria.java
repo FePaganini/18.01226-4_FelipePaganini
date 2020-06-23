@@ -11,13 +11,14 @@ public class Pizzaria {
     Scanner scan = new Scanner(System.in);
     int opcao = 1;
     String confirmarSenha;
-    int pagamento;
+    int pagamento,estado;
 
     public void rodar(){
         while (opcao != 0) {
             menu();
             acao();
         }
+        System.out.println("Finalizando programa!");
     }
 
     public void menu(){
@@ -44,24 +45,31 @@ public class Pizzaria {
                     pedidos.add(new Pedido(geraId(),geraPagamento(pagamento),descricao,valor,EstadoPedido.values()[0]));
                 }
                 else {
-                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
+                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!\n");
                 }
                 break;
             case 2:
-                for(int i=0; i< pedidos.size();i++){
-                    pedidos.get(i).mostrarPedidos();
-                    System.out.println("-----------------------------------------------");
-                }
+                geraQuadroPedidos(pedidos);
                 break;
             case 3:
                 System.out.print("Confirme sua senha: ");
                 confirmarSenha = scan.nextLine();
                 if(usuario.autentificacao(confirmarSenha)){
-
+                    geraQuadroPedidos(pedidos);
+                    System.out.print("Escolha o Id do pedido que será alterado: ");
+                    String escolha = scan.nextLine();
+                    int i = 0;
+                    while (!escolha.equals(pedidos.get(i).getId())){
+                        i+=1;
+                    }
+                    menuEstado();
+                    estado = Integer.parseInt(scan.nextLine());
+                    pedidos.get(i).setEstado(geraEstado(estado));
                 }
                 else {
                     System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
                 }
+                break;
         }
     }
 
@@ -102,4 +110,39 @@ public class Pizzaria {
         }
     }
 
+    public void geraQuadroPedidos(ArrayList<Pedido> pedidos){
+        System.out.println("------------------------------");
+        for(int i=0; i< pedidos.size();i++){
+            pedidos.get(i).mostrarPedidos();
+            System.out.println("------------------------------");
+        }
+    }
+
+    public void menuEstado(){
+        System.out.println("Estados:");
+        System.out.println("1 - " + EstadoPedido.values()[0]);
+        System.out.println("2 - " + EstadoPedido.values()[1]);
+        System.out.println("3 - " + EstadoPedido.values()[2]);
+        System.out.println("4 - " + EstadoPedido.values()[3]);
+        System.out.println("5 - " + EstadoPedido.values()[4]);
+        System.out.print("Insira o estado desejado: ");
+    }
+
+    public Enum geraEstado(int estado){
+        if(estado == 1){
+            return EstadoPedido.values()[0];
+        }
+        else if(estado == 2){
+            return EstadoPedido.values()[1];
+        }
+        else if(estado == 3){
+            return EstadoPedido.values()[2];
+        }
+        else if(estado == 4){
+            return EstadoPedido.values()[3];
+        }
+        else {
+            return EstadoPedido.values()[4];
+        }
+    }
 }

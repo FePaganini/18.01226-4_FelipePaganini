@@ -5,7 +5,19 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe concreta que representa o sistema da pizzaria, nela vemos as ações que podemos tomar
+ */
 public class Pizzaria {
+    /**
+     * @param pedidos É um ArrayList da classe Pedido
+     * @param usuario É uma instância do Usuario com nome, email e senha definidos
+     * @param scan É uma instância de Scanner, usaremos ela para recebermos informações do usuário que utiliza o sistema
+     * @param opcao Int: será usado para tomar ações no sistema
+     * @param confirmarSenha É a String que será usada para confirmar a senha do usuário
+     * @param pagamento Int: será usado para escolher o tipo de pagamento do pedido
+     * @param estado Int: será usado para escolher o estado do pedido
+     */
     ArrayList<Pedido> pedidos = new ArrayList<>();
     Usuario usuario = new Usuario("Michelangelo","tartarugalaranja@hotmail.com","123456");
     Scanner scan = new Scanner(System.in);
@@ -13,6 +25,9 @@ public class Pizzaria {
     String confirmarSenha;
     int pagamento,estado;
 
+    /**
+     * Método que implementará os métodos menu() e acao() até a variável "opcao" ser igual a 0
+     */
     public void rodar(){
         while (opcao != 0) {
             menu();
@@ -21,6 +36,9 @@ public class Pizzaria {
         System.out.println("Finalizando programa!");
     }
 
+    /**
+     * Método que printa o menu de ações que você pode tomar
+     */
     public void menu(){
         System.out.println("--- Pizzaria o Rato que Ri ---");
         System.out.println("1 - Adicionar pedido");
@@ -29,6 +47,16 @@ public class Pizzaria {
         System.out.println("0 - Fechar sistema");
         System.out.print("Escolha a opção: ");
     }
+
+    /**
+     * Método que realizará as ações do sistema, por exemplo: adicionar pedido, mostrar todos os pedidos e alterar
+     * o estado do pedido
+     * Caso variável "opcao" ser igual a 1, caso a senha esteja correta,será adicionado no Array list "pedidos"
+     * um novo pedido. Caso a senha esteja incorreta, o sistema reportará mensagem de erro
+     * Caso variável "opcao" ser igual a 2, será mostrado os pedidos que estão no sistema
+     * Caso variável "opcao" ser igual a 3, caso a senha esteja correta,será possível alterar o estado do pedido
+     * desejada (a partir de seu id). Caso a senha esteja incorreta, o sistema reportará mensagem de erro
+     */
     public void acao(){
         opcao = Integer.parseInt(scan.nextLine());
         switch (opcao){
@@ -73,6 +101,10 @@ public class Pizzaria {
         }
     }
 
+    /**
+     * Método que gera um Id para o pedido
+     * @return retorna uma String composta de 3 números (de 0 a 9) aleatórios
+     */
     private String geraId(){
         Random random = new Random();
         String idGerado = "";
@@ -82,6 +114,9 @@ public class Pizzaria {
         return idGerado;
     }
 
+    /**
+     * Método que printa as formas de pagamento possíveis para o pedido
+     */
     public void menuPagamento(){
         System.out.println("Formas de pagamento:");
         System.out.println("1 - " + FormaPagamento.values()[0]);
@@ -92,6 +127,11 @@ public class Pizzaria {
         System.out.print("Insira a opção de pagamento: ");
     }
 
+    /**
+     * Método que gerará a forma de pagamento para o pedido
+     * @param pagamento Int: será usado para escolher o tipo de pagamento do pedido
+     * @return retorna o Enum que será utilizado como forma de pagamento
+     */
     public Enum geraPagamento(int pagamento){
         if(pagamento == 1){
             return FormaPagamento.values()[0];
@@ -110,6 +150,10 @@ public class Pizzaria {
         }
     }
 
+    /**
+     * Método que printará todos os pedidos com as informações do seu construtor
+     * @param pedidos É um ArrayList da classe Pedido
+     */
     public void geraQuadroPedidos(ArrayList<Pedido> pedidos){
         System.out.println("------------------------------");
         for(int i=0; i< pedidos.size();i++){
@@ -117,7 +161,9 @@ public class Pizzaria {
             System.out.println("------------------------------");
         }
     }
-
+    /**
+     * Método que printa os estados possíveis para o pedido
+     */
     public void menuEstado(){
         System.out.println("Estados:");
         System.out.println("1 - " + EstadoPedido.values()[0]);
@@ -128,6 +174,11 @@ public class Pizzaria {
         System.out.print("Insira o estado desejado: ");
     }
 
+    /**
+     * Método que gerará o estado que substituirá o estado atual do pedido
+     * @param estado Int: será usado para escolher o estado do pedido
+     * @return retorna o Enum que será utilizado como estado do pedido
+     */
     public Enum geraEstado(int estado){
         if(estado == 1){
             return EstadoPedido.values()[0];

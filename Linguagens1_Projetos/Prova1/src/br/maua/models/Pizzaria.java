@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 /**
  * Classe concreta que representa o sistema da pizzaria, nela vemos as ações que podemos tomar
+ * @author Felipe Dos Santos Paganini - felipespaganini@hotmail.com
+ * @since 22/06/2020
+ * @version 1.1
  */
 public class Pizzaria {
     /**
@@ -26,12 +29,17 @@ public class Pizzaria {
     int pagamento,estado;
 
     /**
-     * Método que implementará os métodos menu() e acao() até a variável "opcao" ser igual a 0
+     * Método que implementará os métodos menu() e acao(). Caso a variável "opcao" seja diferente de um dos valores
+     * de menu() é escrito uma mensagem de erro, isso ocorre até "opcao" ser igual a 0 e o programa ser finalizado
      */
     public void rodar(){
         while (opcao != 0) {
             menu();
             acao();
+            if (opcao>3 || opcao<0){
+                System.out.println("ERRO: Escolha uma opção válida!");
+                System.out.println("------------------------------\n");
+            }
         }
         System.out.println("Finalizando programa!");
     }
@@ -73,7 +81,8 @@ public class Pizzaria {
                     pedidos.add(new Pedido(geraId(),geraPagamento(pagamento),descricao,valor,EstadoPedido.values()[0]));
                 }
                 else {
-                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!\n");
+                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
+                    System.out.println("------------------------------\n");
                 }
                 break;
             case 2:
@@ -82,20 +91,35 @@ public class Pizzaria {
             case 3:
                 System.out.print("Confirme sua senha: ");
                 confirmarSenha = scan.nextLine();
-                if(usuario.autentificacao(confirmarSenha)){
+                if(usuario.autentificacao(confirmarSenha)) {
                     geraQuadroPedidos(pedidos);
-                    System.out.print("Escolha o Id do pedido que será alterado: ");
-                    String escolha = scan.nextLine();
                     int i = 0;
-                    while (!escolha.equals(pedidos.get(i).getId())){
-                        i+=1;
+                    try {
+                        pedidos.get(i);
                     }
-                    menuEstado();
-                    estado = Integer.parseInt(scan.nextLine());
-                    pedidos.get(i).setEstado(geraEstado(estado));
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println("Não há nenhum pedido adicionado!");
+                        System.out.println("------------------------------\n");
+                        break;
+                    }
+                    try {
+                        System.out.print("Escolha o Id do pedido que será alterado: ");
+                        String escolha = scan.nextLine();
+                        while (!escolha.equals(pedidos.get(i).getId())) {
+                            i += 1;
+                        }
+                        menuEstado();
+                        estado = Integer.parseInt(scan.nextLine());
+                        pedidos.get(i).setEstado(geraEstado(estado));
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        System.out.println("Não há nenhum pedido com o Id inserido!");
+                        System.out.println("------------------------------\n");
+                    }
                 }
                 else {
                     System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
+                    System.out.println("------------------------------\n");
                 }
                 break;
         }

@@ -40,7 +40,7 @@ public class Pedido implements QuadroPedidos {
         System.out.println("Id: "+ id);
         System.out.println("Forma de pagamento: "+ pagamento);
         System.out.println("Descrição: "+ descricao);
-        System.out.println("Valor: "+ valor + " reais");
+        System.out.println("Valor: R$ "+ valor );
         System.out.println("Estado do pedido: "+ estado);
     }
 

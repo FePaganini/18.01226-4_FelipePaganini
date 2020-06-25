@@ -129,7 +129,19 @@ public class Pizzaria {
                             i += 1;
                         }
                         menuEstado();
-                        estado = Integer.parseInt(scan.nextLine());
+                        while (true) {
+                            try {
+                                estado = Integer.parseInt(scan.nextLine());
+                                while (estado > FormaPagamento.values().length || estado < 1) {
+                                    System.out.print("Insira uma opção válida de estado: ");
+                                    estado = Integer.parseInt(scan.nextLine());
+                                }
+                                break;
+                            }
+                            catch (RuntimeException e) {
+                                System.out.print("Insira uma opção válida de estado: ");
+                            }
+                        }
                         pedidos.get(i).setEstado(geraEstado(estado));
                     }
                     catch (IndexOutOfBoundsException e) {
@@ -138,7 +150,7 @@ public class Pizzaria {
                     }
                 }
                 else {
-                    System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
+                    System.out.println("Senha incorreta! Não foi possível alterar pedido!");
                     System.out.println("------------------------------");
                 }
                 break;

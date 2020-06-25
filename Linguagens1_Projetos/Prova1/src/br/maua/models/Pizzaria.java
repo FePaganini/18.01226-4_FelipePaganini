@@ -29,8 +29,8 @@ public class Pizzaria {
     int pagamento,estado;
 
     /**
-     * Método que implementará os métodos menu() e acao(). Caso a variável "opcao" seja diferente de um dos valores
-     * de menu() é escrito uma mensagem de erro, isso ocorre até "opcao" ser igual a 0 e o programa ser finalizado
+     * Método que implementará os métodos menu() e acao(). Caso a variável "opcao" seja igual a 0 o programa será
+     * finalizado
      */
     public void rodar(){
         while (opcao != 0) {
@@ -55,11 +55,13 @@ public class Pizzaria {
     /**
      * Método que realizará as ações do sistema, por exemplo: adicionar pedido, mostrar todos os pedidos e alterar
      * o estado do pedido
+     * Caso variável "opcao" ser igual a 0, o programa é encerrado
      * Caso variável "opcao" ser igual a 1, caso a senha esteja correta,será adicionado no Array list "pedidos"
-     * um novo pedido. Caso a senha esteja incorreta, o sistema reportará mensagem de erro
+     * um novo pedido. Caso a senha esteja incorreta, o sistema reportará mensagem de erro.
      * Caso variável "opcao" ser igual a 2, será mostrado os pedidos que estão no sistema
      * Caso variável "opcao" ser igual a 3, caso a senha esteja correta,será possível alterar o estado do pedido
-     * desejada (a partir de seu id). Caso a senha esteja incorreta, o sistema reportará mensagem de erro
+     * desejada (a partir de seu id). Caso a senha esteja incorreta, o sistema reportará mensagem de erro.
+     * Caso "opcao" ser diferente dos casos acima, entrará em um loop até ser colocado um valor correto para ela
      */
     public void acao(){
         while (true){
@@ -98,7 +100,7 @@ public class Pizzaria {
                     String descricao = scan.nextLine();
                     System.out.print("Valor: ");
                     String valor = scan.nextLine();
-                    pedidos.add(new Pedido(geraId(),geraPagamento(pagamento),descricao,valor,EstadoPedido.values()[0]));
+                    pedidos.add(new Pedido(geraId(),geraPagamento(pagamento),descricao,valor,EstadoPedido.REALIZADO));
                 }
                 else {
                     System.out.println("Senha incorreta! Não foi possível adicionar pedido!");

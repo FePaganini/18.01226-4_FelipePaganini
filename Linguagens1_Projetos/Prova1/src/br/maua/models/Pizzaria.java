@@ -36,10 +36,6 @@ public class Pizzaria {
         while (opcao != 0) {
             menu();
             acao();
-            if (opcao>3 || opcao<0){
-                System.out.println("ERRO: Escolha uma opção válida!");
-                System.out.println("------------------------------");
-            }
         }
         System.out.println("Finalizando programa!");
     }
@@ -66,7 +62,19 @@ public class Pizzaria {
      * desejada (a partir de seu id). Caso a senha esteja incorreta, o sistema reportará mensagem de erro
      */
     public void acao(){
-        opcao = Integer.parseInt(scan.nextLine());
+        while (true){
+            try {
+                opcao = Integer.parseInt(scan.nextLine());
+                while (opcao>3 || opcao<0){
+                    System.out.print("Escolha uma opção válida: ");
+                    opcao = Integer.parseInt(scan.nextLine());
+                }
+                break;
+            }
+            catch (NumberFormatException e){
+                System.out.print("Escolha uma opção válida: ");
+            }
+        }
         switch (opcao){
             case 1:
                 System.out.print("Confirme sua senha: ");
@@ -168,7 +176,7 @@ public class Pizzaria {
      * @param pagamento Int: será usado para escolher o tipo de pagamento do pedido
      * @return retorna o Enum que será utilizado como forma de pagamento
      */
-    public Enum geraPagamento(int pagamento){
+    public FormaPagamento geraPagamento(int pagamento){
         return FormaPagamento.values()[pagamento-1];
     }
 
@@ -201,7 +209,7 @@ public class Pizzaria {
      * @param estado Int: será usado para escolher o estado do pedido
      * @return retorna o Enum que será utilizado como estado do pedido
      */
-    public Enum geraEstado(int estado){
-            return EstadoPedido.values()[estado-1];
+    public EstadoPedido geraEstado(int estado){
+        return EstadoPedido.values()[estado-1];
     }
 }

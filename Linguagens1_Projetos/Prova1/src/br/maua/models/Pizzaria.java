@@ -38,7 +38,7 @@ public class Pizzaria {
             acao();
             if (opcao>3 || opcao<0){
                 System.out.println("ERRO: Escolha uma opção válida!");
-                System.out.println("------------------------------\n");
+                System.out.println("------------------------------");
             }
         }
         System.out.println("Finalizando programa!");
@@ -73,7 +73,19 @@ public class Pizzaria {
                 confirmarSenha = scan.nextLine();
                 if(usuario.autentificacao(confirmarSenha)){
                     menuPagamento();
-                    pagamento = Integer.parseInt(scan.nextLine());
+                    while (true) {
+                        try {
+                            pagamento = Integer.parseInt(scan.nextLine());
+                            while (pagamento > FormaPagamento.values().length || pagamento < 1) {
+                                System.out.print("Insira uma opção válida de pagamento: ");
+                                pagamento = Integer.parseInt(scan.nextLine());
+                            }
+                            break;
+                        }
+                        catch (RuntimeException e) {
+                            System.out.print("Insira uma opção válida de pagamento: ");
+                        }
+                    }
                     System.out.print("Descrição do pedido: ");
                     String descricao = scan.nextLine();
                     System.out.print("Valor: ");
@@ -82,7 +94,7 @@ public class Pizzaria {
                 }
                 else {
                     System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
-                    System.out.println("------------------------------\n");
+                    System.out.println("------------------------------");
                 }
                 break;
             case 2:
@@ -99,7 +111,7 @@ public class Pizzaria {
                     }
                     catch (IndexOutOfBoundsException e) {
                         System.out.println("Não há nenhum pedido adicionado!");
-                        System.out.println("------------------------------\n");
+                        System.out.println("------------------------------");
                         break;
                     }
                     try {
@@ -114,12 +126,12 @@ public class Pizzaria {
                     }
                     catch (IndexOutOfBoundsException e) {
                         System.out.println("Não há nenhum pedido com o Id inserido!");
-                        System.out.println("------------------------------\n");
+                        System.out.println("------------------------------");
                     }
                 }
                 else {
                     System.out.println("Senha incorreta! Não foi possível adicionar pedido!");
-                    System.out.println("------------------------------\n");
+                    System.out.println("------------------------------");
                 }
                 break;
         }
@@ -157,21 +169,7 @@ public class Pizzaria {
      * @return retorna o Enum que será utilizado como forma de pagamento
      */
     public Enum geraPagamento(int pagamento){
-        if(pagamento == 1){
-            return FormaPagamento.values()[0];
-        }
-        else if(pagamento == 2){
-            return FormaPagamento.values()[1];
-        }
-        else if(pagamento == 3){
-            return FormaPagamento.values()[2];
-        }
-        else if(pagamento == 4){
-            return FormaPagamento.values()[3];
-        }
-        else {
-            return FormaPagamento.values()[4];
-        }
+        return FormaPagamento.values()[pagamento-1];
     }
 
     /**
@@ -204,20 +202,6 @@ public class Pizzaria {
      * @return retorna o Enum que será utilizado como estado do pedido
      */
     public Enum geraEstado(int estado){
-        if(estado == 1){
-            return EstadoPedido.values()[0];
-        }
-        else if(estado == 2){
-            return EstadoPedido.values()[1];
-        }
-        else if(estado == 3){
-            return EstadoPedido.values()[2];
-        }
-        else if(estado == 4){
-            return EstadoPedido.values()[3];
-        }
-        else {
-            return EstadoPedido.values()[4];
-        }
+            return EstadoPedido.values()[estado-1];
     }
 }

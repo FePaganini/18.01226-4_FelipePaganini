@@ -20,14 +20,14 @@
          </cursor></Button>
       <BorderPane layoutX="250.0" layoutY="20.0" prefHeight="40.0" prefWidth="400.0">
          <right>
-            <Button fx:id="btnNext" layoutX="20.0" maxWidth="100.0" minHeight="16.0" minWidth="2.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: GRAY;" text="Next Card" BorderPane.alignment="CENTER">
+            <Button fx:id="btnNext" layoutX="20.0" maxWidth="100.0" minHeight="16.0" minWidth="2.0" mnemonicParsing="false" onAction="#nextCard" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: GRAY;" text="Next Card" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
          </right>
          <left>
-            <Button fx:id="btnPrevious" minHeight="20.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Previous Card" BorderPane.alignment="CENTER">
+            <Button fx:id="btnPrevious" minHeight="20.0" mnemonicParsing="false" onAction="#previousCard" prefHeight="24.0" prefWidth="100.0" text="Previous Card" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -82,7 +82,7 @@
       </GridPane>
       <BorderPane layoutX="250.0" layoutY="540.0" prefHeight="40.0" prefWidth="400.0">
          <left>
-            <Button fx:id="btnCreate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Create" BorderPane.alignment="CENTER">
+            <Button fx:id="btnCreate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#createCard" prefHeight="24.0" prefWidth="100.0" text="Create" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>

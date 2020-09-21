@@ -11,10 +11,12 @@ import sample.dao.PokeCardDAO;
 import sample.model.PokeCard;
 import sample.model.PokeCardList;
 
+
 public class Controller {
     private boolean start = false;
     private PokeCardList list = new PokeCardList();
     private PokeCardDAO pokeCardDAO = new PokeCardDAO();
+    private int actualCard = 0;
 
     @FXML
     private Button btnStart, btnUpdate, btnNext, btnPrevious, btnCreate;
@@ -30,7 +32,53 @@ public class Controller {
         start = true;
         list.pokeCardList =  pokeCardDAO.getAll();
         btnStart.setVisible(false);
-        showInfo(list.pokeCardList.get(0));
+        showInfo(list.pokeCardList.get(actualCard));
+    }
+
+    @FXML
+    public void previousCard(){
+        if(actualCard == 0) {
+            actualCard = list.pokeCardList.size()-1;
+        }
+        else{
+            actualCard--;
+        }
+        showInfo(list.pokeCardList.get(actualCard));
+    }
+
+    @FXML
+    public void nextCard(){
+        if(actualCard == list.pokeCardList.size()-1) {
+            actualCard = 0;
+        }
+        else{
+            actualCard++;
+        }
+        showInfo(list.pokeCardList.get(actualCard));
+    }
+
+    @FXML
+    public void createCard(){
+        if(!list.idValidate(txtId.getText())) {
+            PokeCard pokeCard = new PokeCard(
+                    txtUrl.getText(),
+                    txtId.getText(),
+                    txtName.getText(),
+                    txtRarity.getText(),
+                    txtSeries.getId(),
+                    txtSet.getId()
+            );
+            pokeCardDAO.create(pokeCard);
+            list.pokeCardList = pokeCardDAO.getAll();
+            clearText();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Id already exists, try another one");
+            alert.showAndWait();
+            txtId.clear();
+        }
     }
 
     @FXML
@@ -50,10 +98,20 @@ public class Controller {
             Image image = new Image(url);
             imageCard.setImage(image);
         } catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
             alert.setHeaderText("Card image not found");
             alert.show();
         }
+    }
+
+    @FXML
+    public void clearText(){
+        txtId.clear();
+        txtName.clear();
+        txtRarity.clear();
+        txtSeries.clear();
+        txtSet.clear();
+        txtUrl.clear();
     }
 }

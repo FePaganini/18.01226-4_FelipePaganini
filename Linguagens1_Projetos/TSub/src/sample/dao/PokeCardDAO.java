@@ -95,4 +95,5 @@ public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
     public String getSelectAllString(String table) {
         return "SELECT * FROM " + table;
     }
+
 }

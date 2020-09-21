@@ -17,7 +17,7 @@ public class Controller {
     @FXML
     private TextField txtId, txtName, txtRarity, txtSeries, txtSet, txtUrl;
     @FXML
-    private Label lblId, lblName, lblRarity, lblSeries, lblSet;
+    private Label lblId, lblName, lblRarity, lblSeries, lblSet, lblUrl;
 
     @FXML
     public void start(){

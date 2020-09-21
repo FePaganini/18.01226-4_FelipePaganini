@@ -13,8 +13,11 @@
       <Circle disable="true" layoutX="450.0" layoutY="290.0" radius="160.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle disable="true" fill="WHITE" layoutX="450.0" layoutY="290.0" radius="140.0" stroke="WHITE" strokeType="INSIDE" />
       <Circle disable="true" fill="WHITE" layoutX="450.0" layoutY="290.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
-      <ImageView fx:id="imageCard" fitHeight="300.0" fitWidth="200.0" layoutX="350.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnStart" layoutX="400.0" layoutY="278.0" maxWidth="200.0" minHeight="12.0" mnemonicParsing="false" onAction="#start" prefHeight="24.0" prefWidth="100.0" text="Start" textAlignment="CENTER" />
+      <ImageView fx:id="imageCard" fitHeight="300.0" fitWidth="200.0" layoutX="353.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnStart" layoutX="400.0" layoutY="278.0" maxWidth="200.0" minHeight="12.0" mnemonicParsing="false" onAction="#start" prefHeight="24.0" prefWidth="100.0" text="Start" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <BorderPane layoutX="250.0" layoutY="20.0" prefHeight="40.0" prefWidth="400.0">
          <right>
             <Button fx:id="btnNext" layoutX="20.0" maxWidth="100.0" minHeight="16.0" minWidth="2.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: GRAY;" text="Next Card" BorderPane.alignment="CENTER">
@@ -79,10 +82,16 @@
       </GridPane>
       <BorderPane layoutX="250.0" layoutY="540.0" prefHeight="40.0" prefWidth="400.0">
          <left>
-            <Button fx:id="btnCreate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Create" BorderPane.alignment="CENTER" />
+            <Button fx:id="btnCreate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Create" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </left>
          <right>
-            <Button fx:id="btnUpdate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Update" BorderPane.alignment="CENTER" />
+            <Button fx:id="btnUpdate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Update" BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </right>
       </BorderPane>
    </children>

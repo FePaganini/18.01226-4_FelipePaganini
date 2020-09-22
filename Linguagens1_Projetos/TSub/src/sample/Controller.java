@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import sample.dao.PokeCardDAO;
 import sample.model.PokeCard;
 import sample.model.PokeCardList;
@@ -26,12 +28,20 @@ public class Controller {
     private Label lblId, lblName, lblRarity, lblSeries, lblSet, lblUrl;
     @FXML
     private ImageView imageCard;
+    @FXML
+    private BorderPane borpanePreviousNext, borpaneCreateUpdate;
+    @FXML
+    private GridPane gridpaneId,gridpaneSeries;
 
     @FXML
     public void start(){
         start = true;
         list.pokeCardList =  pokeCardDAO.getAll();
         btnStart.setVisible(false);
+        borpaneCreateUpdate.setVisible(true);
+        borpanePreviousNext.setVisible(true);
+        gridpaneId.setVisible(true);
+        gridpaneSeries.setVisible(true);
         showInfo(list.pokeCardList.get(actualCard));
     }
 
@@ -65,8 +75,8 @@ public class Controller {
                     txtId.getText(),
                     txtName.getText(),
                     txtRarity.getText(),
-                    txtSeries.getId(),
-                    txtSet.getId()
+                    txtSeries.getText(),
+                    txtSet.getText()
             );
             pokeCardDAO.create(pokeCard);
             list.pokeCardList = pokeCardDAO.getAll();
@@ -76,6 +86,31 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Id already exists, try another one");
+            alert.showAndWait();
+            txtId.clear();
+        }
+    }
+
+    @FXML
+    public void updateCard(){
+        if(list.pokeCardList.get(actualCard).getId().equals(txtId.getText())) {
+            PokeCard pokeCard = new PokeCard(
+                    txtUrl.getText(),
+                    txtId.getText(),
+                    txtName.getText(),
+                    txtRarity.getText(),
+                    txtSeries.getText(),
+                    txtSet.getText()
+            );
+            pokeCardDAO.update(pokeCard);
+            list.pokeCardList = pokeCardDAO.getAll();
+            showInfo(list.pokeCardList.get(actualCard));
+            clearText();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Enter id of the displayed card");
             alert.showAndWait();
             txtId.clear();
         }

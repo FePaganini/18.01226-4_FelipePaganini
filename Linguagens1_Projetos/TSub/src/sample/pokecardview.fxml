@@ -18,7 +18,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <BorderPane layoutX="250.0" layoutY="20.0" prefHeight="40.0" prefWidth="400.0">
+      <BorderPane fx:id="borpanePreviousNext" layoutX="250.0" layoutY="20.0" prefHeight="40.0" prefWidth="400.0" visible="false">
          <right>
             <Button fx:id="btnNext" layoutX="20.0" maxWidth="100.0" minHeight="16.0" minWidth="2.0" mnemonicParsing="false" onAction="#nextCard" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: GRAY;" text="Next Card" BorderPane.alignment="CENTER">
                <cursor>
@@ -34,7 +34,7 @@
             </Button>
          </left>
       </BorderPane>
-      <GridPane layoutX="20.0" layoutY="450.0" prefHeight="80.0" prefWidth="400.0">
+      <GridPane fx:id="gridpaneId" layoutX="20.0" layoutY="450.0" prefHeight="80.0" prefWidth="400.0" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="80.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="160.0" />
@@ -57,7 +57,7 @@
             <TextField fx:id="txtRarity" alignment="CENTER" prefHeight="48.0" prefWidth="160.0" promptText="Enter card rarity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <GridPane layoutX="480.0" layoutY="450.0" prefHeight="80.0" prefWidth="400.0">
+      <GridPane fx:id="gridpaneSeries" layoutX="480.0" layoutY="450.0" prefHeight="80.0" prefWidth="400.0" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="80.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="160.0" />
@@ -80,7 +80,7 @@
             <TextField fx:id="txtUrl" alignment="CENTER" prefHeight="34.0" prefWidth="165.0" promptText="Enter card url" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <BorderPane layoutX="250.0" layoutY="540.0" prefHeight="40.0" prefWidth="400.0">
+      <BorderPane fx:id="borpaneCreateUpdate" layoutX="250.0" layoutY="540.0" prefHeight="40.0" prefWidth="400.0" visible="false">
          <left>
             <Button fx:id="btnCreate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#createCard" prefHeight="24.0" prefWidth="100.0" text="Create" BorderPane.alignment="CENTER">
                <cursor>
@@ -88,7 +88,7 @@
                </cursor></Button>
          </left>
          <right>
-            <Button fx:id="btnUpdate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Update" BorderPane.alignment="CENTER">
+            <Button fx:id="btnUpdate" minHeight="10.0" minWidth="10.0" mnemonicParsing="false" onAction="#updateCard" prefHeight="24.0" prefWidth="100.0" text="Update" BorderPane.alignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>

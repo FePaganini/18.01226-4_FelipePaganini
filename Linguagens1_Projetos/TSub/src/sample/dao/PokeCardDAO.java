@@ -6,6 +6,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Felipe dos Santos Paganini 18.01226-4
+ * @author Thiago T. Yara de Araujo 18.01363-5
+ * @since 21/09/2020
+ */
+
 public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
     private Connection connection;
     private String myDBConnectionString = "jdbc:sqlite:dadospokecards.db";
@@ -18,6 +24,11 @@ public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
         }
     }
 
+    /**
+     * Faz um busca no arquivo disponibilizado, o qual é o banco de dados, e a partir dele salva os dados linha por
+     * linha em uma lista. Caso ocorra um erro, ele será reportado no console.
+     * @return Lista com dados do arquivo disponibilizado
+     */
     @Override
     public List<PokeCard> getAll() {
         List<PokeCard> list = new ArrayList<>();
@@ -42,6 +53,11 @@ public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
         return list;
     }
 
+    /**
+     * Atualiza, a partir de um id, os dados de uma carta existente no banco de dados. Caso ocorra um erro, ele será
+     * reportado no console.
+     * @param pokeCard Objeto da Poke Carta que será atualizada
+     */
     @Override
     public void update(PokeCard pokeCard) {
         try {
@@ -59,6 +75,10 @@ public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
         }
     }
 
+    /**
+     * Cria uma nova Poke Carta e adiciona no banco de dados. Caso ocorra um erro, ele será reportado no console.
+     * @param pokeCard Objeto da Poke Carta que será criada e adicionada ao banco de dados
+     */
     @Override
     public void create(PokeCard pokeCard) {
         try {
@@ -69,28 +89,43 @@ public class PokeCardDAO implements  DAO<PokeCard>, DAOFields {
             preparedStatement.setString(4,pokeCard.getSeries());
             preparedStatement.setString(5,pokeCard.getSet());
             preparedStatement.setString(6,pokeCard.getUrl());
-            // Execute PreparedStatement
+            // Executes PreparedStatement
             int retorno = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
+    /**
+     * @return  Nome da tabela do banco de dados
+     */
     @Override
     public String getTableName() {
         return "pokecards";
     }
 
+    /**
+     * @param table Nome da tabela do banco de dados
+     * @return  Função Update do SQL, todos os ? serão substituídos pelos valores corretos
+     */
     @Override
     public String getUpdateString(String table) {
         return "UPDATE " + table + " SET id = ?, name= ?, rarity = ?, series = ?, set_collection = ?, url = ? WHERE id = ?;";
     }
 
+    /**
+     * @param table Nome da tabela do banco de dados
+     * @return  Função Insert do SQL, todos os ? serão substituídos pelos valores corretos
+     */
     @Override
     public String getInsertString(String table) {
         return "INSERT INTO "+table+ " (id, name, rarity, series, set_collection, url) VALUES (?, ?, ?, ?, ?, ?);";
     }
 
+    /**
+     * @param table Nome da tabela do banco de dados
+     * @return  Função Select do SQL, todos os ? serão substituídos pelos valores corretos
+     */
     @Override
     public String getSelectAllString(String table) {
         return "SELECT * FROM " + table;

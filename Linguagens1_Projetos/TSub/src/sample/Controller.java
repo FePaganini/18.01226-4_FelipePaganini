@@ -13,6 +13,11 @@ import sample.dao.PokeCardDAO;
 import sample.model.PokeCard;
 import sample.model.PokeCardList;
 
+/**
+ * @author Felipe dos Santos Paganini 18.01226-4
+ * @author Thiago T. Yara de Araujo 18.01363-5
+ * @since 21/09/2020
+ */
 
 public class Controller {
     private boolean start = false;
@@ -33,6 +38,10 @@ public class Controller {
     @FXML
     private GridPane gridpaneId,gridpaneSeries;
 
+    /**
+     * A partir do banco de dados, carrega uma lista que terá todos os dados. A primeira Poke Carta e suas informações
+     * dessa lista é apresentada e os botões para a ativação de outras funções são liberados.
+     */
     @FXML
     public void start(){
         start = true;
@@ -45,6 +54,10 @@ public class Controller {
         showInfo(list.pokeCardList.get(actualCard));
     }
 
+    /**
+     * Será exibida a Poke Carta anterior da lista, caso essa Poke Carta seja a primeira da lista retornará para a
+     * última Poke Carta
+     */
     @FXML
     public void previousCard(){
         if(actualCard == 0) {
@@ -56,6 +69,10 @@ public class Controller {
         showInfo(list.pokeCardList.get(actualCard));
     }
 
+    /**
+     * Será exibida a Poke Carta seguinte da lista, caso essa Poke Carta seja a última da lista retornará para a
+     * primeira Poke Carta
+     */
     @FXML
     public void nextCard(){
         if(actualCard == list.pokeCardList.size()-1) {
@@ -67,9 +84,16 @@ public class Controller {
         showInfo(list.pokeCardList.get(actualCard));
     }
 
+    /**
+     * A partir dos valores obtidos nos Text Fields haverá a criação de uma nova Poke Carta, esta será adicionada ao
+     * arquivo do banco de dados e este será salvo. A lista receberá novamente os dados para que não seja necessário
+     * fechar o programa para navergar por eles. Apagará os valores do Text Field após isto.
+     * Caso ocorra erro será mostra uma mensagem de erro que o Id já tinha sido cadastrado
+     * OBS: os valores de Id não pode ser repetido e nem nulo
+     */
     @FXML
     public void createCard(){
-        if(!list.idValidate(txtId.getText())) {
+        if(!list.idValidate(txtId.getText()) && !txtId.getText().isEmpty()) {
             PokeCard pokeCard = new PokeCard(
                     txtUrl.getText(),
                     txtId.getText(),
@@ -91,6 +115,13 @@ public class Controller {
         }
     }
 
+    /**
+     * A partir dos valores obtidos nos Text Fields haverá a atualização da Poke Carta visualizada, a partir do seu id,
+     * no arquivo do banco de dados e este será salvo. A lista receberá novamente os dados para que não seja necessário
+     * fechar o programa para navergar por eles, também já mostrando os dados atualizados. Apagará os valores do Text
+     * Field após isto.
+     * Caso ocorra erro será mostra uma mensagem de erro que o Id inserido tem que ser o da carta apresentada
+     */
     @FXML
     public void updateCard(){
         if(list.pokeCardList.get(actualCard).getId().equals(txtId.getText())) {
@@ -116,6 +147,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Mostra o id, nome, raridade, serie, set(coleção), url e foto da Poke Carta atual
+     * @param pokeCard Poke Carta que será visualizada
+     */
     @FXML
     public void showInfo(PokeCard pokeCard){
         lblId.setText(pokeCard.getId());

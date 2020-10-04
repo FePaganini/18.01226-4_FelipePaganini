@@ -3,6 +3,7 @@ package model;
 import dao.AnimeDAO;
 import dao.MangaDAO;
 import parser.AnimeParser;
+import parser.MangaParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -64,6 +65,23 @@ public class Sistema {
                     }
                     break;
                 case 2:
+                    System.out.print("Insira o nome do Manga: ");
+                    nome = scanner.nextLine();
+                    if(mangaList.nomeExistente(nome)){
+                        mangaList.mangaList = mangaDAO.getKey(nome);
+                        System.out.println("Manga:\n" + mangaList.mangaList.get(0));
+                    }
+                    else {
+                        try {
+                            System.out.println("Realizando request a API!");
+                            String json_retorno = leituraManga(nome);
+                            Manga aux = MangaParser.parseJson(json_retorno);
+                            System.out.println("Manga:\n" + aux);
+                            mangaDAO.create(aux);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
                     break;
                 case 3:
                     if(animeList.animeList.isEmpty()){
@@ -93,6 +111,21 @@ public class Sistema {
 
     private static String leituraAnime(String nome) throws Exception{
         URL url = new URL("https://api.jikan.moe/v3/search/anime?q=" + nome);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String result;
+        StringBuffer content = new StringBuffer();
+        while((result=in.readLine()) != null){
+            content.append(result);
+        }
+        in.close();
+        return content.toString();
+    }
+
+    private static String leituraManga(String nome) throws Exception{
+        URL url = new URL("https://api.jikan.moe/v3/search/manga?q=" + nome);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 

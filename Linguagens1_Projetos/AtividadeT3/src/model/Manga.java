@@ -15,6 +15,17 @@ public class Manga {
         this.volumes = volumes;
     }
 
+    @Override
+    public String toString() {
+        return "Nome = '" + nome + '\'' +
+                "\nSinopse = '" + sinopse + '\'' +
+                "\nUrl = '" + url + '\'' +
+                "\nTipo = '" + tipo + '\'' +
+                "\nNota = " + nota +
+                "\nCapitulos = " + capitulos +
+                "\nVolumes = " + volumes;
+    }
+
     public String getNome() {
         return nome;
     }

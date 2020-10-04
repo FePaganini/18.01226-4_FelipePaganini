@@ -77,6 +77,7 @@ public class AnimeDAO implements DAO<Anime>,DAOFields{
             int retorno = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.out.println("Possível erro de digitação e o Anime já está cadastrado no DB\n");
         }
     }
 

@@ -86,6 +86,12 @@ public class MangaDAO implements  DAO<Manga>, DAOFields{
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Possível erro de digitação e o Manga já está cadastrado no DB\n");
         }
     }
 
@@ -107,6 +113,6 @@ public class MangaDAO implements  DAO<Manga>, DAOFields{
 
     @Override
     public String getSelectKey(String table, String nome) {
-        return "SELECT * FROM " + table + " WHERE nome = " + nome;
+        return "SELECT * FROM " + table + " WHERE nome = '" + nome + "'";
     }
 }

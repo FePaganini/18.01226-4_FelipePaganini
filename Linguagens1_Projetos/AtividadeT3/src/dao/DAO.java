@@ -1,4 +1,8 @@
 package dao;
 
-public interface DAO {
+import java.util.List;
+
+public interface DAO<T>{
+    List<T> getAll();
+    void create(T t);
 }

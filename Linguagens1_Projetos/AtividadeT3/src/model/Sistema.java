@@ -11,6 +11,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * Classe que realizará a interação com o usuário
+ * @author Felipe Dos Santos Paganini - felipespaganini@hotmail.com - 18.01226-4
+ * @since 04/10/2020
+ * @version 1.0
+ */
 public class Sistema {
 
     private int opcao = 1;
@@ -21,6 +27,9 @@ public class Sistema {
     private AnimeDAO animeDAO = new AnimeDAO();
     private MangaDAO mangaDAO = new MangaDAO();
 
+    /**
+     * Função que printará o menu e suas opções
+     */
     public void menu(){
         System.out.println("--- MENU ---");
         System.out.println("1- Procurar Anime\n2- Procurar Manga\n3- Visualizar Lista de Animes" +
@@ -28,6 +37,18 @@ public class Sistema {
         System.out.print("Insira sua opção: ");
     }
 
+    /**
+     * Função que dependendo da opção realizará diversas ações:
+     * Caso 0: fecha o programa
+     * Caso 1: pesquisa o nome do Anime, caso tenha no DB de Animes (consequentemente terá na Lista de Animes
+     * criada) printa direto o Anime com nome pedido, caso não será realizado uma busca na API e a partir
+     * dela retorna o Anime e este é adicionado na DB de Animes
+     * Caso 2: pesquisa o nome do Manga, caso tenha no DB de Mangas (consequentemente terá na Lista de Mangas
+     * criada) printa direto o Manga com nome pedido, caso não será realizado uma busca na API e a partir
+     * dela retorna o Manga e este é adicionado na DB de Mangas
+     * Caso 3: printa todas a Lista de Animes, caso ela esteja vazia printará que ela estará vazia
+     * Caso 4: printa todas a Lista de Mangas, caso ela esteja vazia printará que ela estará vazia
+     */
     public void rodar(){
         while (opcao != 0) {
             animeList.animeList = animeDAO.getAll();
@@ -109,6 +130,11 @@ public class Sistema {
         System.exit(0);
     }
 
+    /**
+     * @param nome String que é o nome do Anime buscado
+     * @return retorna uma String que é o conteúdo vindo da API
+     * @throws Exception pega os erros que podem ocorrer
+     */
     private static String leituraAnime(String nome) throws Exception{
         URL url = new URL("https://api.jikan.moe/v3/search/anime?q=" + nome);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -124,6 +150,11 @@ public class Sistema {
         return content.toString();
     }
 
+    /**
+     * @param nome String que é o nome do Manga buscado
+     * @return retorna uma String que é o conteúdo vindo da API
+     * @throws Exception pega os erros que podem ocorrer
+     */
     private static String leituraManga(String nome) throws Exception{
         URL url = new URL("https://api.jikan.moe/v3/search/manga?q=" + nome);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

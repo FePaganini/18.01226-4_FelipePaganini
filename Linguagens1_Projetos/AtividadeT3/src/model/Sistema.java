@@ -82,6 +82,12 @@ public class Sistema {
                             animeDAO.create(aux);
                         } catch (Exception exception) {
                             exception.printStackTrace();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("Pode ser que o Anime buscado não exista!");
                         }
                     }
                     break;
@@ -101,6 +107,12 @@ public class Sistema {
                             mangaDAO.create(aux);
                         } catch (Exception exception) {
                             exception.printStackTrace();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("Pode ser que o Manga buscado não exista!");
                         }
                     }
                     break;

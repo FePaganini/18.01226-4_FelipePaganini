@@ -9,4 +9,13 @@ public class AnimeList {
     public  AnimeList(){
         this.animeList = new ArrayList<>();
     }
+    
+    public boolean nomeExistente(String novoNome){
+        for(Anime anime: this.animeList){
+            if(anime.getNome().equals(novoNome)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

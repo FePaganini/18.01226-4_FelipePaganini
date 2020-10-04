@@ -2,6 +2,7 @@ package model;
 
 import dao.AnimeDAO;
 import dao.MangaDAO;
+import parser.AnimeParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -26,8 +27,9 @@ public class Sistema {
         System.out.print("Insira sua opção: ");
     }
 
-    public void rodar() {
+    public void rodar(){
         while (opcao != 0) {
+            animeList.animeList = animeDAO.getAll();
             menu();
             while (true) {
                 try {
@@ -45,11 +47,25 @@ public class Sistema {
                 case 1:
                     System.out.print("Insira o nome do Anime: ");
                     nome = scanner.nextLine();
+                    if(animeList.nomeExistente(nome)){
+                        animeList.animeList = animeDAO.getKey(nome);
+                        System.out.println("Anime:\n" + animeList.animeList.get(0));
+                    }
+                    else {
+                        try {
+                            System.out.println("Realizando request a API!");
+                            String json_retorno = leituraAnime(nome);
+                            Anime aux = AnimeParser.parseJson(json_retorno);
+                            System.out.println("Anime:\n" + aux);
+                            animeDAO.create(aux);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
                     break;
                 case 2:
                     break;
                 case 3:
-                    animeList.animeList = animeDAO.getAll();
                     if(animeList.animeList.isEmpty()){
                         System.out.println("Lista de Animes está vazia!\n");
                     }

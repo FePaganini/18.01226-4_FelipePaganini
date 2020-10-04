@@ -98,7 +98,7 @@ public class AnimeDAO implements DAO<Anime>,DAOFields{
 
     @Override
     public String getSelectKey(String table, String nome) {
-        return "SELECT * FROM " + table + " WHERE nome = " + nome;
+        return "SELECT * FROM " + table + " WHERE nome = '" + nome+"'";
     }
 
 }

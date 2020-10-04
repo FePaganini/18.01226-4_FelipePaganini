@@ -13,6 +13,15 @@ public class Anime {
         this.episodios = episodios;
     }
 
+    @Override
+    public String toString() {
+        return "Nome = '" + nome + '\'' +
+                "\nSinopse = '" + sinopse + '\'' +
+                "\nUrl da imagem = '" + url + '\'' +
+                "\nNota = " + nota +
+                "\nEpisodios = " + episodios + "\n";
+    }
+
     public String getNome() {
         return nome;
     }

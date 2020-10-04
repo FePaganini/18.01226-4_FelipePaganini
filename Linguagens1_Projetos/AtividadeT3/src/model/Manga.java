@@ -23,7 +23,7 @@ public class Manga {
                 "\nTipo = '" + tipo + '\'' +
                 "\nNota = " + nota +
                 "\nCapitulos = " + capitulos +
-                "\nVolumes = " + volumes;
+                "\nVolumes = " + volumes + "\n";
     }
 
     public String getNome() {

@@ -35,7 +35,7 @@ public class Sistema {
             while (true) {
                 try {
                     opcao = Integer.parseInt(scanner.nextLine());
-                    while (opcao > 4 || opcao < 0) {
+                    while(opcao > 4 || opcao < 0) {
                         System.out.print("Insira uma opção válida: ");
                         opcao = Integer.parseInt(scanner.nextLine());
                     }
@@ -55,7 +55,7 @@ public class Sistema {
                     else {
                         try {
                             System.out.println("Realizando request a API!");
-                            String json_retorno = leituraAnime(nome);
+                            String json_retorno = leituraAnime(nome.replace(" ", "%20"));
                             Anime aux = AnimeParser.parseJson(json_retorno);
                             System.out.println("Anime:\n" + aux);
                             animeDAO.create(aux);

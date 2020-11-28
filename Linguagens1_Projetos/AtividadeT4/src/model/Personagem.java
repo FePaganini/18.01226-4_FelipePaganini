@@ -1,14 +1,15 @@
 package model;
 
 public class Personagem {
-    private String nome, raça, profissão;
-    private int mana, atk, atkMag, def, defMag, velocidade, destreza, experiencia, nivel;
+    private String nome, raca, profissao;
+    private int id, mana, atk, atkMag, def, defMag, velocidade, destreza, experiencia, nivel;
 
-    public Personagem(String nome, String raça, String profissão, int mana, int atk,
+    public Personagem(int id, String nome, String raca, String profissao,int mana, int atk,
                       int atkMag, int def, int defMag, int velocidade, int destreza, int experiencia, int nivel) {
+        this.id = id;
         this.nome = nome;
-        this.raça = raça;
-        this.profissão = profissão;
+        this.raca = raca;
+        this.profissao = profissao;
         this.mana = mana;
         this.atk = atk;
         this.atkMag = atkMag;
@@ -20,16 +21,20 @@ public class Personagem {
         this.nivel = nivel;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    public String getRaça() {
-        return raça;
+    public String getRaca() {
+        return raca;
     }
 
-    public String getProfissão() {
-        return profissão;
+    public String getProfissao() {
+        return profissao;
     }
 
     public int getMana() {
@@ -72,8 +77,8 @@ public class Personagem {
     public String toString() {
         return "Personagem{" +
                 "nome='" + nome + '\'' +
-                ", raça='" + raça + '\'' +
-                ", profissão='" + profissão + '\'' +
+                ", raça='" + raca + '\'' +
+                ", profissão='" + profissao + '\'' +
                 ", mana=" + mana +
                 ", atk=" + atk +
                 ", atkMag=" + atkMag +

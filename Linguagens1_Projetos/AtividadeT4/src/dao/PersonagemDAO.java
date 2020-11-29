@@ -6,11 +6,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que fará a comunicação com o Banco de Dados dos Personagens e implementa as interfaces
+ * DAO-Personagem- e DAOFields
+ * @author Felipe Dos Santos Paganini - felipespaganini@hotmail.com - 18.01226-4
+ * @since 29/11/2020
+ * @version 1.0
+ */
 public class PersonagemDAO implements DAO<Personagem>, DAOFields{
 
     private Connection connection;
     private String myDBConnectionString = "jdbc:sqlite:personagens.db";
 
+    /**
+     * Construtor da classe a qual estabelece a ligação com o banco de dados de Personagens
+     */
     public PersonagemDAO(){
         try{
             connection = DriverManager.getConnection(myDBConnectionString);
@@ -20,6 +30,9 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
     }
 
 
+    /**
+     * @return retorna uma lista de Personagem, com todos os Personagens registrados no DB
+     */
     @Override
     public List getAll() {
         List<Personagem> personagens = new ArrayList<>();
@@ -53,6 +66,9 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
         return personagens;
     }
 
+    /**
+     * @param personagem objeto da classe Personagem que terá seus valores atualizados no DB
+     */
     @Override
     public void update(Personagem personagem) {
         try{
@@ -78,6 +94,9 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
     }
 
 
+    /**
+     * @param personagem objeto da classe Personagem que será deletado, a partir do Id, do DB
+     */
     @Override
     public void delete(Personagem personagem) {
         try{
@@ -90,6 +109,9 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
         }
     }
 
+    /**
+     * @param personagem objeto da classe Personagem que será inserido no DB
+     */
     @Override
     public void create(Personagem personagem) {
         try{
@@ -113,22 +135,37 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
         }
     }
 
+    /**
+     * @return uma String que é o nome da tabela do DB
+     */
     @Override
     public String getTableName() {
         return "personagens";
     }
 
+    /**
+     * @param table String que é o nome da tabela do DB
+     * @return retorna uma String com o comando utilizado pelo SQL de excluir dados da tabela a partir do Id
+     */
     @Override
     public String getDeleteString(String table) {
         return "DELETE FROM "+ table +" WHERE id = ?";
     }
 
+    /**
+     * @param table String que é o nome da tabela do DB
+     * @return retorna uma String com o comando utilizado pelo SQL de alterar dados da tabela a partir do Id
+     */
     @Override
     public String getUpdateString(String table) {
         return "UPDATE " + table + " SET nome = ?, raca = ?, profissao = ?, mana = ?, atk = ?, atkMag = ?, def = ?, " +
                 "defMag = ?, velocidade = ?, destreza = ?, experiencia = ?, nivel = ? WHERE id = ?;";
     }
 
+    /**
+     * @param table String que é o nome da tabela do DB
+     * @return retorna uma String com o comando utilizado pelo SQL de inserir dados na tabela
+     */
     @Override
     public String getInsertString(String table) {
         return "INSERT INTO " + table + " (nome ,raca, profissao, mana, atk, atkMag, def, defMag, " +
@@ -136,6 +173,10 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     }
 
+    /**
+     * @param table String que é o nome da tabela do DB
+     * @return retorna uma String com o comando utilizado pelo SQL de selecionar todos os dados da tabela
+     */
     @Override
     public String getSelectAllString(String table) {
         return "SELECT * FROM " + table;

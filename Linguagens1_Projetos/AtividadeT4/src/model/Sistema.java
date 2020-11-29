@@ -7,13 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe que realizará a interação com o usuário
+ * @author Felipe Dos Santos Paganini - felipespaganini@hotmail.com - 18.01226-4
+ * @since 29/11/2020
+ * @version 1.0
+ */
 public class Sistema {
     private int opcao = 1;
     Scanner scanner = new Scanner(System.in);
     List<Personagem> personagemList = new ArrayList<>();
     PersonagemDAO personagemDAO = new PersonagemDAO();
     private int auxiliar, aux, auxAtributos;
+    private String nome, raca, profissao;
+    private int mana, atk, atkMag, def, defMag, velocidade, destreza, experiencia, nivel;
 
+    /**
+     * Função que depdendo da opção escolhida pelo usuário realizará diversas ações
+     * Caso 0: Fecha o programa
+     * Caso 1: Criação de um novo Personagem e este é colocado no DB
+     * Caso 2: Mostra a lista de Personagens disponíveis e a partir do Id atualiza o Personagem no DB,
+     * caso não tenha Personagem no DB ou não coloque um Id disponível não fará nada
+     * Caso 3: Mostra a lista de Personagens disponíveis no DB
+     * Caso 4: Mostra a lista de Personagens disponíveis e a partir do Id deleta um Personagem do DB,
+     * caso não tenha Personagem no DB ou não coloque um Id disponível não fará nada
+     */
     public void rodar(){
         while(opcao != 0){
             personagemList = personagemDAO.getAll();
@@ -21,21 +39,7 @@ public class Sistema {
             escolha();
             switch (opcao){
                 case 1:
-                    String nome, raca, profissao;
-                    int mana, atk, atkMag, def, defMag, velocidade, destreza, experiencia, nivel;
-                    System.out.println("Informe seu Nome: ");
-                    nome = scanner.nextLine();
-                    raca = menuRaca();
-                    profissao = menuProfissao();
-                    mana = valorAtributo("Mana");
-                    atk = valorAtributo("Ataque");
-                    atkMag = valorAtributo("Ataque Mágico");
-                    def = valorAtributo("Defesa");
-                    defMag = valorAtributo("Defesa Mágica");
-                    velocidade = valorAtributo("Velocidade");
-                    destreza = valorAtributo("Destreza");
-                    experiencia = valorAtributo("Experiência");
-                    nivel = valorAtributo("Nível");
+                    dadosPersonagem();
                     Personagem novo = new Personagem(-1,nome,raca,profissao,mana,atk,atkMag,def,defMag,
                             velocidade,destreza,experiencia,nivel);
                     personagemDAO.create(novo);
@@ -49,29 +53,17 @@ public class Sistema {
                         auxiliar = Integer.parseInt(scanner.nextLine());
                     }
                     catch (NumberFormatException e){
-                        System.out.println("Não há Personagem com tal Id!");
+                        System.out.println("Não há Personagem com tal Id!\n");
                         break;
                     }
                     if (idExistente(auxiliar)) {
-                        System.out.println("Informe seu Nome: ");
-                        nome = scanner.nextLine();
-                        raca = menuRaca();
-                        profissao = menuProfissao();
-                        mana = valorAtributo("Mana");
-                        atk = valorAtributo("Ataque");
-                        atkMag = valorAtributo("Ataque Mágico");
-                        def = valorAtributo("Defesa");
-                        defMag = valorAtributo("Defesa Mágica");
-                        velocidade = valorAtributo("Velocidade");
-                        destreza = valorAtributo("Destreza");
-                        experiencia = valorAtributo("Experiência");
-                        nivel = valorAtributo("Nível");
+                       dadosPersonagem();
                         Personagem atualizado = new Personagem(auxiliar, nome, raca, profissao, mana, atk, atkMag,
                                 def, defMag, velocidade, destreza, experiencia, nivel);
                         personagemDAO.update(atualizado);
                         }
                     else {
-                        System.out.println("Não há Personagem com tal Id!");
+                        System.out.println("Não há Personagem com tal Id!\n");
                     }
                     break;
                 case 3:
@@ -86,7 +78,7 @@ public class Sistema {
                         auxiliar = Integer.parseInt(scanner.nextLine());
                     }
                     catch (NumberFormatException e){
-                        System.out.println("Não há Personagem com tal Id!");
+                        System.out.println("Não há Personagem com tal Id!\n");
                         break;
                     }
                     if (idExistente(auxiliar)){
@@ -94,13 +86,16 @@ public class Sistema {
                         personagemDAO.delete(deletado);
                     }
                     else{
-                        System.out.println("Não há Personagem com tal Id!");
+                        System.out.println("Não há Personagem com tal Id!\n");
                     }
                     break;
             }
         }
     }
 
+    /**
+     * Função que printará o menue suas opções
+     */
     public void menu(){
         System.out.println("--- MENU ---");
         System.out.println("1- Criar Personagem\n2- Alterar Atributos do Personagem\n" +
@@ -108,6 +103,9 @@ public class Sistema {
         System.out.print("Insira sua opção: ");
     }
 
+    /**
+     * Função que corrige erros de digitação do usuário para selecionar uma opção do Menu
+     */
     public void escolha(){
         while (true) {
             try {
@@ -124,9 +122,14 @@ public class Sistema {
         }
     }
 
+    /**
+     * Função que retorna um boolean
+     * @return true: caso a lista de personagem está vazia (logo o DB também está vazio) e false: há
+     * personagens na lista (logo no DB também) e mostra os personagens para o usuário
+     */
     public boolean listaPersonagem(){
         if(personagemList.isEmpty()){
-            System.out.println("Lista de Personagens vazia!");
+            System.out.println("Lista de Personagens vazia!\n");
             return true;
         }
         else{
@@ -136,6 +139,11 @@ public class Sistema {
         }
     }
 
+    /**
+     * @param valor número inteiro que será o Id procurado na lista de personagens
+     * @return true: caso o Id seja encontrado na lista de personagens e false: caso o Id não seja encontrado
+     * na lista de personagens
+     */
     public boolean idExistente(int valor){
         for(Personagem personagem: this.personagemList){
             if(personagem.getId() == valor){
@@ -145,6 +153,11 @@ public class Sistema {
         return false;
     }
 
+    /**
+     * Função que mostra todas as Raças disponíveis através do Enum e retorna qual Enum em String foi escolhido
+     * pelo usuário
+     * @return String que é a Raça escolhida pelo usuário
+     */
     public String menuRaca(){
         System.out.println("Raças Disponíveis: ");
         for(int i = 0; i < Raca.values().length; i++){
@@ -167,6 +180,11 @@ public class Sistema {
         return Raca.values()[aux].toString();
     }
 
+    /**
+     * Função que mostra todas as Profissões disponíveis através do Enum e retorna qual Enum em String
+     * foi escolhido pelo usuário
+     * @return String que é a Profissão escolhida pelo usuário
+     */
     public String menuProfissao(){
         System.out.println("Profissões Disponíveis: ");
         for(int i = 0; i < Profissoes.values().length; i++){
@@ -189,6 +207,13 @@ public class Sistema {
         return Profissoes.values()[aux].toString();
     }
 
+    /**
+     * Função que corrige erros de digitação do usuário para selecionar uma opção de valor para atributo do
+     * personagem (exemplo: mana, ataque, velocidade e etc)
+     * @param atributo String para facilitar na escrita do código
+     * @return número inteiro que vai ser acima de 0 e pode ser utilizado para preencher os parâmetros
+     * do Personagem
+     */
     public int valorAtributo(String atributo){
         System.out.println("Informe seu valor de " + atributo + ": ");
         while(true){
@@ -205,6 +230,25 @@ public class Sistema {
             }
         }
         return auxAtributos;
+    }
+
+    /**
+     * Função que recolhe os dados para o objeto Personagem, também criada para não poluir o código
+     */
+    public void dadosPersonagem(){
+        System.out.println("Informe seu Nome: ");
+        nome = scanner.nextLine();
+        raca = menuRaca();
+        profissao = menuProfissao();
+        mana = valorAtributo("Mana");
+        atk = valorAtributo("Ataque");
+        atkMag = valorAtributo("Ataque Mágico");
+        def = valorAtributo("Defesa");
+        defMag = valorAtributo("Defesa Mágica");
+        velocidade = valorAtributo("Velocidade");
+        destreza = valorAtributo("Destreza");
+        experiencia = valorAtributo("Experiência");
+        nivel = valorAtributo("Nível");
     }
 }
 

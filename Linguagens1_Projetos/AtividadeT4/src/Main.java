@@ -1,8 +1,9 @@
 import model.Sistema;
 
-public class Main {
-    public static void main(String[] args) {
-        Sistema sistema = new Sistema();
-        sistema.rodar();
+    public class Main {
+        public static void main(String[] args) {
+            Sistema sistema = new Sistema();
+            sistema.rodar();
+        }
     }
-}
+

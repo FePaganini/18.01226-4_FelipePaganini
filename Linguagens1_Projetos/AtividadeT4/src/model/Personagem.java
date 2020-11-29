@@ -80,17 +80,18 @@ public class Personagem {
 
     @Override
     public String toString() {
-        return  "Nome='" + nome + '\'' +
-                ", Raça ='" + raca + '\'' +
-                ", Profissão ='" + profissao + '\'' +
-                ", Mana =" + mana +
-                ", Ataque =" + atk +
-                ", Ataque Mágico =" + atkMag +
-                ", Defesa =" + def +
-                ", Defesa Mágica =" + defMag +
-                ", Velocidade=" + velocidade +
-                ", Destreza=" + destreza +
-                ", Experiência=" + experiencia +
-                ", Nível=" + nivel + "\n";
+        return  "Id = " + id +
+                ",Nome = " + nome +
+                ", Raça = " + raca +
+                ", Profissão = " + profissao +
+                ", Mana = " + mana +
+                ", Ataque = " + atk +
+                ", Ataque Mágico = " + atkMag +
+                ", Defesa = " + def +
+                ", Defesa Mágica = " + defMag +
+                ", \nVelocidade = " + velocidade +
+                ", Destreza = " + destreza +
+                ", Experiência = " + experiencia +
+                ", Nível = " + nivel + "\n";
     }
 }

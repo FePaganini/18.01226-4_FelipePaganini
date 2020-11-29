@@ -34,7 +34,7 @@ public enum Raca {
     FANTASMA{
         @Override
         public String toString(){
-            return "Demonio";
+            return "Fantasma";
         }
     }
 }

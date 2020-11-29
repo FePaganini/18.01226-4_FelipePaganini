@@ -42,7 +42,28 @@ public class Sistema {
                     break;
                 case 2:
                     listaPersonagem();
-
+                    auxiliar = Integer.parseInt(scanner.nextLine());
+                    if (idExistente(auxiliar)){
+                        System.out.println("Informe seu Nome: ");
+                        nome = scanner.next();
+                        raca = menuRaca();
+                        profissao = menuProfissao();
+                        mana = valorAtributo("Mana");
+                        atk = valorAtributo("Ataque");
+                        atkMag = valorAtributo("Ataque Mágico");
+                        def = valorAtributo("Defesa");
+                        defMag = valorAtributo("Defesa Mágica");
+                        velocidade = valorAtributo("Velocidade");
+                        destreza = valorAtributo("Destreza");
+                        experiencia = valorAtributo("Experiência");
+                        nivel = valorAtributo("Nível");
+                        Personagem atualizado = new Personagem(auxiliar,nome,raca,profissao,mana,atk,atkMag,
+                                def,defMag,velocidade,destreza,experiencia,nivel);
+                        personagemDAO.update(atualizado);
+                    }
+                    else{
+                        System.out.println("Não há Personagem com tal Id!");
+                    }
                     break;
                 case 3:
                     listaPersonagem();
@@ -64,8 +85,8 @@ public class Sistema {
 
     public void menu(){
         System.out.println("--- MENU ---");
-        System.out.println("1- Criar Personagem\n2- Alterar Personagem\n3- Consulte Todos Os Personagens" +
-            "\n4- Deletar Personagem\n0- Fechar o Sistema");
+        System.out.println("1- Criar Personagem\n2- Alterar Atributos do Personagem\n" +
+                "3- Consulte Todos Os Personagens\n4- Deletar Personagem\n0- Fechar o Sistema");
         System.out.print("Insira sua opção: ");
     }
 
@@ -149,11 +170,11 @@ public class Sistema {
         while(true){
             while(aux<0){
                 try{
-                    System.out.println("Escolha o valor de "+ atributo + ": ");
+                    System.out.println("Informe seu valor de "+ atributo + ": ");
                     aux = Integer.parseInt(scanner.next());
                 }
                 catch (NumberFormatException e){
-                    System.out.println("Escolha o valor de "+ atributo + ": ");
+                    System.out.println("Informe seu valor de "+ atributo + ": ");
                 }
             }
             break;

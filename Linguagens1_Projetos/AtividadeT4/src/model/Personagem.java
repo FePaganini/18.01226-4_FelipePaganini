@@ -3,6 +3,11 @@ package model;
 public class Personagem {
     private String nome, raca, profissao;
     private int id, mana, atk, atkMag, def, defMag, velocidade, destreza, experiencia, nivel;
+    
+    public Personagem(int id){
+        this(id,null,null,null,0,0,0,0,
+                0,0,0,0,0);
+    }
 
     public Personagem(int id, String nome, String raca, String profissao,int mana, int atk,
                       int atkMag, int def, int defMag, int velocidade, int destreza, int experiencia, int nivel) {

@@ -11,6 +11,7 @@ public class Sistema {
     Scanner scanner = new Scanner(System.in);
     List<Personagem> personagemList = new ArrayList<>();
     PersonagemDAO personagemDAO = new PersonagemDAO();
+    private int auxiliar;
 
     public void rodar(){
         while(opcao != 0){
@@ -27,7 +28,14 @@ public class Sistema {
                     break;
                 case 4:
                     listaPersonagem();
-
+                    auxiliar = Integer.parseInt(scanner.nextLine());
+                    if (idExistente(auxiliar)){
+                        Personagem deletado = new Personagem(auxiliar);
+                        personagemDAO.delete(deletado);
+                    }
+                    else{
+                        System.out.println("Não há Personagem com tal Id!");
+                    }
                     break;
             }
         }
@@ -64,6 +72,15 @@ public class Sistema {
             personagemList.forEach(personagem -> personagem.toString());
             System.out.println("");
         }
+    }
+
+    public boolean idExistente(int valor){
+        for(Personagem personagem: this.personagemList){
+            if(personagem.getId() == valor){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

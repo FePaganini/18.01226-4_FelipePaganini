@@ -57,19 +57,19 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
     public void update(Personagem personagem) {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(getUpdateString(getTableName()));
-            preparedStatement.setString(2, personagem.getNome());
-            preparedStatement.setString(3, personagem.getRaca());
-            preparedStatement.setString(4, personagem.getProfissao());
-            preparedStatement.setInt(5, personagem.getMana());
-            preparedStatement.setInt(6, personagem.getAtk());
-            preparedStatement.setInt(7, personagem.getAtkMag());
-            preparedStatement.setInt(8, personagem.getDef());
-            preparedStatement.setInt(9, personagem.getDefMag());
-            preparedStatement.setInt(10, personagem.getVelocidade());
-            preparedStatement.setInt(11, personagem.getDestreza());
-            preparedStatement.setInt(12, personagem.getExperiencia());
-            preparedStatement.setInt(13, personagem.getNivel());
-            preparedStatement.setInt(14, personagem.getId());
+            preparedStatement.setString(1, personagem.getNome());
+            preparedStatement.setString(2, personagem.getRaca());
+            preparedStatement.setString(3, personagem.getProfissao());
+            preparedStatement.setInt(4, personagem.getMana());
+            preparedStatement.setInt(5, personagem.getAtk());
+            preparedStatement.setInt(6, personagem.getAtkMag());
+            preparedStatement.setInt(7, personagem.getDef());
+            preparedStatement.setInt(8, personagem.getDefMag());
+            preparedStatement.setInt(9, personagem.getVelocidade());
+            preparedStatement.setInt(10, personagem.getDestreza());
+            preparedStatement.setInt(11, personagem.getExperiencia());
+            preparedStatement.setInt(12, personagem.getNivel());
+            preparedStatement.setInt(13, personagem.getId());
             int retorno = preparedStatement.executeUpdate();
         }
         catch (SQLException e){
@@ -94,18 +94,18 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
     public void create(Personagem personagem) {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(getInsertString(getTableName()));
-            preparedStatement.setString(2, personagem.getNome());
-            preparedStatement.setString(3, personagem.getRaca());
-            preparedStatement.setString(4, personagem.getProfissao());
-            preparedStatement.setInt(5, personagem.getMana());
-            preparedStatement.setInt(6, personagem.getAtk());
-            preparedStatement.setInt(7, personagem.getAtkMag());
-            preparedStatement.setInt(8, personagem.getDef());
-            preparedStatement.setInt(9, personagem.getDefMag());
-            preparedStatement.setInt(10, personagem.getVelocidade());
-            preparedStatement.setInt(11, personagem.getDestreza());
-            preparedStatement.setInt(12, personagem.getExperiencia());
-            preparedStatement.setInt(13, personagem.getNivel());
+            preparedStatement.setString(1, personagem.getNome());
+            preparedStatement.setString(2, personagem.getRaca());
+            preparedStatement.setString(3, personagem.getProfissao());
+            preparedStatement.setInt(4, personagem.getMana());
+            preparedStatement.setInt(5, personagem.getAtk());
+            preparedStatement.setInt(6, personagem.getAtkMag());
+            preparedStatement.setInt(7, personagem.getDef());
+            preparedStatement.setInt(8, personagem.getDefMag());
+            preparedStatement.setInt(9, personagem.getVelocidade());
+            preparedStatement.setInt(10, personagem.getDestreza());
+            preparedStatement.setInt(11, personagem.getExperiencia());
+            preparedStatement.setInt(12, personagem.getNivel());
             int retorno = preparedStatement.executeUpdate();
         }
         catch (SQLException throwables){
@@ -125,15 +125,15 @@ public class PersonagemDAO implements DAO<Personagem>, DAOFields{
 
     @Override
     public String getUpdateString(String table) {
-        return "UPDATE " + table + " SET nome = ?, raca = ?, profissao = ?, atk = ?, atkMag = ?, def = ?, " +
+        return "UPDATE " + table + " SET nome = ?, raca = ?, profissao = ?, manga = ?, atk = ?, atkMag = ?, def = ?, " +
                 "defMag = ?, velocidade = ?, destreza = ?, experiencia = ?, nivel = ? WHERE id = ?;";
     }
 
     @Override
     public String getInsertString(String table) {
-        return "INSERT INTO " + table + " (nome ,raca, profissao, atk, atkMag, def, defMag, " +
+        return "INSERT INTO " + table + " (nome ,raca, profissao, manga, atk, atkMag, def, defMag, " +
                 "velocidade, destreza, experiencia, nivel) VALUES " +
-                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     }
 
     @Override

@@ -13,20 +13,21 @@ class cardSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.amber,
-      body: Stack(children: [
+      body: Column(children: [
         Padding(
           padding: const EdgeInsets.all(50.0),
-          child: Container(
-              height: 100,
+          child: Expanded(
               child: Center(child: Image.network("https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png"))
           ),
         ),
         txtField(controladorPokemon),
-        ElevatedButton(onPressed: () async {
-          await requestApi();
-            trocarTela(context);
+        Expanded(
+          child: FlatButton(onPressed: () async {
+            await requestApi();
+              trocarTela(context);
 
-        }, child: Text("Pesquisar")
+          }, child: Text("Pesquisar")
+          ),
         )
       ]),
     );
@@ -44,9 +45,7 @@ class cardSearch extends StatelessWidget {
   Future<pokemonCard> requestApi() async {
     var requisicao = NetworkHelper(url: "https://api.pokemontcg.io/v1/cards?name=" + controladorPokemon.text + "&pageSize=1");
     var json = pokemonCard.fromJson(await requisicao.getData());
-    print(json.cards[0].imageUrlHiRes);
-
-    card = new minhaCarta(json.cards[0].imageUrlHiRes, json.cards[0].series, json.cards[0].set, json.cards[0].nationalPokedexNumber.toString(), json.cards[0].hp, json.cards[0].name);
+    card = new minhaCarta(json.cards[0].imageUrlHiRes, json.cards[0].hp, json.cards[0].nationalPokedexNumber.toString(), json.cards[0].set, json.cards[0].series, json.cards[0].name);
 
   }
 }

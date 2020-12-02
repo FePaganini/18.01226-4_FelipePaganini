@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:prova_P4/models/minhaCarta.dart';
 
+import 'package:prova_P4/models/pokemonCard.dart';
+import 'package:prova_P4/utility/NetworkHelper.dart';
 import 'package:prova_P4/pages/cardView.dart';
 
 final controladorPokemon = TextEditingController();
 class cardSearch extends StatelessWidget {
+  minhaCarta card;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +22,32 @@ class cardSearch extends StatelessWidget {
           ),
         ),
         txtField(controladorPokemon),
-        ElevatedButton(onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>
-                cardView(pokemon: controladorPokemon.text)),
-          );
+        ElevatedButton(onPressed: () async {
+          await requestApi();
+            trocarTela(context);
+
         }, child: Text("Pesquisar")
         )
       ]),
     );
+}
+
+  void trocarTela(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>
+          cardView(card: card)),
+    );
+}
+
+
+  Future<pokemonCard> requestApi() async {
+    var requisicao = NetworkHelper(url: "https://api.pokemontcg.io/v1/cards?name=" + controladorPokemon.text + "&pageSize=1");
+    var json = pokemonCard.fromJson(await requisicao.getData());
+    print(json.cards[0].imageUrlHiRes);
+
+    card = new minhaCarta(json.cards[0].imageUrlHiRes, json.cards[0].series, json.cards[0].set, json.cards[0].nationalPokedexNumber.toString(), json.cards[0].hp, json.cards[0].name);
+
   }
 }
 
@@ -44,3 +64,5 @@ Widget txtField(TextEditingController nomePokemon){
     ),
   );
 }
+
+
